@@ -9,8 +9,8 @@ jobs:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
-      contents: read
+      id-token: write  # Required for Trusted Publishing (OIDC)
+      contents: read   # Default, but explicit for clarity
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +20,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install build tools
-        run: python -m pip install --upgrade build
+        run: python -m pip install --upgrade build hatchling  # Added hatchling here
 
       - name: Build package
         run: python -m build
